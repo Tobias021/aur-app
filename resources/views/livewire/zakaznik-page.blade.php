@@ -15,7 +15,7 @@
             @if($isNew) wire:submit="create"
             @else wire:submit="update"
             @endif
-            class="m-auto grid grid-flow-row grid-cols-[auto_2fr] grid-cols-auto items-center w-1/2"
+            class="m-auto grid grid-flow-row grid-cols-[auto_2fr] gap-3 items-center w-1/2"
         >
             <label for="jmeno">Jméno:</label>
             <input class="my-3 " type="text" name="jmeno" placeholder="Jméno" wire:model="jmeno"></input>
