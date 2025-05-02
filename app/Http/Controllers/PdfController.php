@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessPdfs;
 use App\Models\DokladModel;
 use App\Traits\DokladCurrencySymbols;
 use Illuminate\Http\Request;
@@ -27,11 +28,22 @@ class PdfController extends Controller
         // return redirect("/odd");
     }
 
-    static function saveDokladPdf($id)
+    public function createBulkPdf()
     {
+        $testDoklady = DokladModel::where("castka_celkem", ">", 24000)->get();
+
+        // $doklady = DokladModel::find([]);
+        ProcessPdfs::dispatchSync($testDoklady);
+    }
+
+    static function saveDokladPdf($id, $folderName = "")
+    {
+        if (!$folderName) {
+            $folderName = "$folderName/";
+        }
         $this->createDokladPdf($id)
             ->disk("local")
-            ->save("tmp/$id.pdf");
+            ->save("tmp/$folderName$id.pdf");
     }
 
     private function createDokladPdf($id): PdfBuilder

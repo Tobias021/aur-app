@@ -21,7 +21,7 @@ Route::patch("/odd/{id}", [FormSubmitController::class, "update"]);
 
 Route::get("/pdf", [PdfController::class, "downloadPdf"]);
 
-Route::get("/pdf/{id}", [PdfController::class, "previewDokladPdf"]);
+Route::get("/pdf/{id}", [PdfController::class, "createBulkPdf"]);
 
 Route::get("/zakaznik/novy", ZakaznikPage::class);
 
